@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-    before_action :set_post, only: [:show, :edit, :update, :destroy]
+    before_action :load_post, only: [:destroy]
     
     # GET /posts
     def index
@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     # POST /posts
     def create
         @post = Post.new(post_params)
-
+        #binding.pry
         respond_to do |format|
             if @post.save
                 format.html { redirect_to posts_url, notice: 'Post was successfully created.' }
@@ -38,7 +38,7 @@ class PostsController < ApplicationController
 
     private
         # Use callbacks to share common setup or constraints between actions.
-        def set_post
+        def load_post
           @post = Post.find(params[:id])
         end
 
