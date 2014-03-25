@@ -15,7 +15,7 @@ Blog::Application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   resources :posts
 
-  devise_for :admin, :skip => [:registration, :confirmations]
+  devise_for :user, :skip => [:registration, :confirmations]
   namespace :admin do
     get "/" => "index#index"
     # Directs /admin/products/* to Admin::ProductsController

@@ -1,5 +1,5 @@
 class Admin::PostsController < AdminController
-  before_filter :authenticate_admin!
+  before_filter :authenticate_user!
 
   before_action :load_post, only: [:edit, :update, :destroy]
 
@@ -33,7 +33,7 @@ class Admin::PostsController < AdminController
   # POST /admin/posts
   def create
     @post = Post.new(post_params)
-    @post.admin_id = current_admin.id
+    @post.user_id = current_user.id
     #binding.pry
     respond_to do |format|
       if @post.save
