@@ -37,6 +37,8 @@ gem 'less-rails'
 gem 'therubyracer'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'bootstrap3'
 gem 'devise'
+gem 'cancan'
+gem 'rolify'
 
 group :development do
     gem 'pry'
