@@ -1,0 +1,24 @@
+%h1 Listing posts
+%table.table.table-striped
+  %thead
+    %tr
+      %th #
+      %th Title
+      %th Content
+      %th Added at
+      %th Options
+  %tbody
+    - @posts.each do |post|
+      %tr
+        %td= post.id
+        %td= post.title
+        %td= post.post
+        %td= post.created_at
+        %td
+          %div.btn-group
+            = link_to 'Edit', edit_admin_post_path(post), :class => 'btn btn-success'
+            = link_to 'Destroy', admin_post_path(post), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
+
+%br/
+
+= link_to 'New Post', new_admin_post_path, :class => "btn btn-lg btn-primary"

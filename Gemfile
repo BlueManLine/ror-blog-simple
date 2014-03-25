@@ -35,7 +35,7 @@ end
 gem 'haml-rails'
 gem 'less-rails'
 gem 'therubyracer'
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'bootstrap3'
 gem 'devise'
 
 group :development do
