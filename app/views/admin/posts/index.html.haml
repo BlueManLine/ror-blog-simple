@@ -5,18 +5,20 @@
       %th #
       %th Title
       %th Content
-      %th Added at
-      %th Options
+      %th{:style => "width:190px;"} Added at
+      %th{:style => "width:180px;"} Options
   %tbody
     - @posts.each do |post|
       %tr
-        %td= post.id
-        %td= post.title
+        %td
+          %span.badge{"data-toggle" => "tooltip", "data-placement" => "left", "title" => "#{post.admin.present? ? "#"+post.admin.id.to_s+" "+post.admin.email : ''}"}
+            = post.id
+        %td= truncate(post.title, :length => 25)
         %td= truncate(post.post, :length => 100)
         %td= post.created_at
         %td
           %div.btn-group
-            = link_to 'Edit', edit_admin_post_path(post), :class => 'btn btn-success'
+            = link_to 'Edit', edit_admin_post_path(post), class: 'btn btn-success'
             = link_to 'Destroy', admin_post_path(post), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
 
 %br/
