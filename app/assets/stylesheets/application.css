@@ -11,3 +11,8 @@
  *= require_self
  *= require_tree .
  */
+
+.date_ceil
+{
+    width: 190px;
+}

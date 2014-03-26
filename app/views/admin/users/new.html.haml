@@ -1,0 +1,22 @@
+%h2 Create new user
+= form_for([:admin, @user], html: { role: "form" }) do |f|
+
+  - if @user.errors.any?
+    #error_explanation.alert.alert-danger
+      %h2
+        Errors:
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.label :email, 'Email address'
+    = f.email_field :email, autofucus: true, placeholder: "Enter email", class: "form-control"
+  .form-group
+    = f.label :password, 'Password'
+    = f.password_field :password, placeholder: "Password", class: "form-control"
+  .form-group
+    = f.label :password_confirmation, 'Password'
+    = f.password_field :password_confirmation, placeholder: "Confirm the password", class: "form-control"
+
+  %div= f.submit "Sign up", class: "btn btn-default"
