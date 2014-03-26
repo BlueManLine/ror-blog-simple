@@ -1,4 +1,5 @@
-= form_for [:admin, @user] do |f|
+= form_for([:admin, @user], html: { role: "form" }) do |f|
+
   - if @user.errors.any?
     #error_explanation.alert.alert-danger
       %h2
@@ -6,20 +7,15 @@
       %ul
         - @user.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    = f.label :email
-    %br/
-    = f.text_field :email
 
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password
+  .form-group
+    = f.label :email, 'Email address'
+    = f.email_field :email, autofucus: true, placeholder: "Enter email", class: "form-control"
+  .form-group
+    = f.label :password, 'Password'
+    = f.password_field :password, placeholder: "Password", class: "form-control"
+  .form-group
+    = f.label :password_confirmation, 'Password'
+    = f.password_field :password_confirmation, placeholder: "Confirm the password", class: "form-control"
 
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation
-
-  .actions
-    = f.submit
+  %div= f.submit (defined?(submit_text) ? submit_text : "Create"), class: "btn btn-default"

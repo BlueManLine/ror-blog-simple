@@ -11,7 +11,7 @@ class Admin::UsersController < AdminController
     @user = User.new
   end
 
-  # PUT /admin/users
+  # POST /admin/users
   def create
     @user = User.new(params.require(:user).permit(:email, :password, :password_confirmation))
 
@@ -24,7 +24,35 @@ class Admin::UsersController < AdminController
         #format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
+  end
 
+  # GET /admin/users/1/edit
+  def edit
+    @user = User.find(params[:id])
+
+    rescue ActiveRecord::RecordNotFound
+      flash[:error] = "Sorry, but the user doesnt exists"
+      redirect_to admin_users_url
+  end
+
+  # PATCH/PUT /admin/users/1
+  def update
+    @user = User.find(params[:id])
+
+    if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
+
+    respond_to do |format|
+      if @user.update(params.require(:user).permit(:email, :password, :password_confirmation))
+        format.html { redirect_to admin_users_url, notice: 'User was successfully updated.' }
+        #format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        #format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
 end
